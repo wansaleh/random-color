@@ -31,14 +31,28 @@ export default function Color() {
     <Box
       minH="100vh"
       minW="100vw"
-      bg={`linear-gradient(${randomInt(360)}deg, ${color?.colors[0]} 50%, ${
-        color?.colors[1]
-      } 50.05%)`}
+      bg={color?.colors[0]}
+      // bg={`linear-gradient(${randomInt(360)}deg, ${color?.colors[0]} 50%, ${
+      //   color?.colors[1]
+      // } 50.05%)`}
       onClick={() => {
         selectRandom();
         setToggle(!toggle);
       }}
       userSelect="none"
-    />
+      transition="all 0.8s ease"
+    >
+      <Box
+        pos="absolute"
+        top="50%"
+        left="-100%"
+        right="-100%"
+        bottom="-100%"
+        transition="all 0.8s ease"
+        transformOrigin="top"
+        bg={color?.colors[1]}
+        transform={`rotate(${randomInt(360)}deg)`}
+      />
+    </Box>
   );
 }
