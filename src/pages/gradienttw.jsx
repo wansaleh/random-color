@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import useInterval from 'use-interval';
 import { NumberParam, useQueryParam } from 'use-query-params';
 
-import gradients from '../gradients.json';
-import { randomElement, randomInt } from '../utils';
+import gradients from '../gradients-tailwind.json';
+import { randomElement } from '../utils';
 
-export default function Gradient() {
+export default function GradientTW() {
   const [gradient, setGradient] = useState(gradients[0]);
   const [toggle, setToggle] = useState(true);
   const [seconds] = useQueryParam('seconds', NumberParam);
@@ -24,18 +24,17 @@ export default function Gradient() {
 
   const selectRandom = () => {
     const g = randomElement(gradients);
-    setGradient({
-      name: g.name,
-      colors: g.colors,
-      gradient: `linear-gradient(${randomInt(360)}deg, ${g.colors.join(', ')})`
-    });
+    setGradient(g);
   };
+
+  console.log(gradient);
 
   return (
     <Box
       minH="100vh"
       minW="100vw"
-      bg={gradient?.gradient}
+      // bg={gradient?.gradient}
+      className={gradient.colors}
       onClick={() => {
         selectRandom();
         setToggle(!toggle);
@@ -54,14 +53,14 @@ export default function Gradient() {
         lineHeight="1.4"
         letterSpacing="tight"
       >
-        <Box>{gradient.name}</Box>
+        <Box>{gradient.title}</Box>
         <Box
           fontSize="sm"
           fontWeight="500"
           letterSpacing="normal"
           textTransform="lowercase"
         >
-          {gradient.colors.join(' to ')}
+          {gradient.colors}
         </Box>
       </Box>
     </Box>
